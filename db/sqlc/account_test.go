@@ -1,6 +1,7 @@
 package sqlc
 
 import (
+	"backend/util"
 	"context"
 	"testing"
 
@@ -10,9 +11,9 @@ import (
 
 func TestCreateAccount(t *testing.T) {
 	arg:= CreateAccountParams{
-		Owner: "Amitabh",
-		Balance: 1000,
-		Currency: "INR",
+		Owner: util.RandomOwner(),
+		Balance: util.RandomMoney(),
+		Currency: util.RandomCurrency(),
 
 	}
 	account, err:= testQueries.CreateAccount(context.Background(),arg)
@@ -21,5 +22,12 @@ func TestCreateAccount(t *testing.T) {
 	// require.Equal(t. .Owner,account.Owner)
 	require.NotZero(t,account.ID)
 	require.NotZero(t,account.CreatedAt)
+}
+
+func TestGetOwnerByID(t *testing.T) {
+
+	account, err:= testQueries.GetAccount(context.Background(),4)
+	t.Logf(account.Owner)
+	t.Log(err)
 }
 

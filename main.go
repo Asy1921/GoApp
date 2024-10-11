@@ -1,4 +1,4 @@
-package main
+package sqlc
 
 import (
 	"encoding/json"
@@ -9,6 +9,7 @@ import (
 
 func sayHi(w http.ResponseWriter, r *http.Request) {
 	w.WriteHeader(http.StatusOK)
+
 	json.NewEncoder(w).Encode("Hello from Go Backed")
 }
 func main() {
